@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Metacognition Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="stars-shower" class="stars-shower" aria-hidden="true"></div>
+  <main class="page dashboard-page">
+    <header class="header">
+      <h1 class="title">Dashboard</h1>
+      <a href="index.html" class="link-log">Log</a>
+    </header>
+
+    <section id="xp-section" class="xp-section" aria-hidden="false">
+      <div class="xp-row">
+        <span class="xp-label">XP</span>
+        <span id="xp-value" class="xp-value">0</span>
+      </div>
+      <div class="xp-row">
+        <span class="xp-label">Level</span>
+        <span id="level-value" class="xp-value">0</span>
+      </div>
+      <div class="xp-row">
+        <span class="xp-label">Streak</span>
+        <span id="streak-value" class="xp-value">0 days</span>
+      </div>
+    </section>
+
+    <section id="weekly-section" class="weekly-section">
+      <h2 class="section-title">Last 7 days</h2>
+      <div id="weekly-content" class="weekly-content"></div>
+      <div id="empty-state-wrap" class="empty-state-wrap" hidden>
+        <p id="empty-state" class="empty-state">No entries yet. Data will appear here after logging.</p>
+      </div>
+    </section>
+
+    <nav class="nav">
+      <a href="index.html" class="link-dashboard">Back to Log</a>
+    </nav>
+  </main>
+
+  <script src="js/storage.js"></script>
+  <script src="js/xp.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/cosmic.js"></script>
+</body>
+</html>

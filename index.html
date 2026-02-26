@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metacognition Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="stars-shower" class="stars-shower" aria-hidden="true"></div>
+  <main class="page logging-page">
+    <header class="header">
+      <h1 class="title">Metacognition Tracker</h1>
+    </header>
+
+    <form id="log-form" class="log-form" novalidate>
+      <section class="slider-group">
+        <label for="logic-emotion">Logic ↔ Emotion</label>
+        <div class="slider-row">
+          <input type="range" id="logic-emotion" name="logicEmotion" min="-5" max="5" value="0" aria-valuemin="-5" aria-valuemax="5" aria-valuenow="0">
+          <output id="logic-emotion-value" class="slider-value" for="logic-emotion">0</output>
+        </div>
+      </section>
+
+      <section class="slider-group">
+        <label for="energy-direction">Inward ↔ Outward Energy</label>
+        <div class="slider-row">
+          <input type="range" id="energy-direction" name="energyDirection" min="-5" max="5" value="0" aria-valuemin="-5" aria-valuemax="5" aria-valuenow="0">
+          <output id="energy-direction-value" class="slider-value" for="energy-direction">0</output>
+        </div>
+      </section>
+
+      <section class="slider-group">
+        <label for="control-flow">Flow ↔ Control</label>
+        <div class="slider-row">
+          <input type="range" id="control-flow" name="controlFlow" min="-5" max="5" value="0" aria-valuemin="-5" aria-valuemax="5" aria-valuenow="0">
+          <output id="control-flow-value" class="slider-value" for="control-flow">0</output>
+        </div>
+      </section>
+
+      <section class="slider-group">
+        <label for="stability">Emotional Stability</label>
+        <div class="slider-row">
+          <input type="range" id="stability" name="stability" min="1" max="5" value="3" aria-valuemin="1" aria-valuemax="5" aria-valuenow="3">
+          <output id="stability-value" class="slider-value" for="stability">3</output>
+        </div>
+      </section>
+
+      <section class="note-group">
+        <label for="note">Note</label>
+        <input type="text" id="note" name="note" maxlength="200" placeholder="Optional short note" class="note-input" autocomplete="off">
+      </section>
+
+      <button type="submit" id="submit-btn" class="btn btn-submit">Submit</button>
+      <p id="save-feedback" class="save-feedback" aria-live="polite" hidden>Saved</p>
+    </form>
+
+    <nav class="nav">
+      <a href="dashboard.html" class="link-dashboard">Dashboard</a>
+    </nav>
+  </main>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/cosmic.js"></script>
+</body>
+</html>

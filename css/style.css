@@ -1,0 +1,549 @@
+/* Metacognition Tracker — beautiful night cosmic vibe, mobile-first */
+
+:root {
+  --bg: #0a0b12;
+  --bg-overlay: rgba(5, 7, 15, 0.72);
+  --text: #d4d8e8;
+  --text-dim: #8b92b0;
+  --border: #3d4266;
+  --slider-track: #2a2d45;
+  --slider-thumb: #6b72a0;
+  --slider-thumb-hover: #9ca3cf;
+  --input-bg: rgba(20, 22, 40, 0.85);
+  --card-bg: rgba(18, 20, 38, 0.9);
+  --accent: #7b7cb8;
+  --accent-soft: #5c5d8a;
+  --bar-fill-start: #5c5d8a;
+  --bar-fill-end: #8b7cb8;
+  --glow-purple: rgba(140, 100, 200, 0.15);
+  --glow-magenta: rgba(180, 120, 220, 0.08);
+  --radius: 12px;
+  --space: 1.5rem;
+  --space-lg: 2rem;
+  --space-sm: 0.75rem;
+}
+
+/* Cosmic theme keyframes — slow, immersive, no flash */
+@keyframes cosmicBreath {
+  0% {
+    opacity: 0.92;
+    filter: brightness(0.95);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+@keyframes bgReveal {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes driftSlow {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+@keyframes driftSlower {
+  from { transform: translateY(0); }
+  to { transform: translateY(-300px); }
+}
+
+@keyframes nebulaShift {
+  0% { transform: translate(-5%, -5%) scale(1); }
+  100% { transform: translate(5%, 5%) scale(1.1); }
+}
+
+@keyframes floatParticles {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes rippleOut {
+  to { transform: scale(4); opacity: 0; }
+}
+
+@keyframes fadeInSoft {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Slow shower of stars — cute, gentle fall */
+@keyframes starFall {
+  from { transform: translateY(-20px); }
+  to { transform: translateY(100vh); }
+}
+
+/* Click sparkle — dots drift outward and fade */
+@keyframes sparkleOut {
+  from {
+    transform: rotate(var(--angle)) translateY(0);
+    opacity: 0.85;
+  }
+  to {
+    transform: rotate(var(--angle)) translateY(-32px);
+    opacity: 0;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Cosmic image + dark overlay — fixed, full bleed, slow breath */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: linear-gradient(180deg, var(--bg-overlay) 0%, rgba(5, 7, 18, 0.82) 100%), url('../assets/cosmic-bg.png');
+  background-size: 100% 100%, cover;
+  background-position: 0 0, center;
+  background-repeat: no-repeat;
+  animation: cosmicBreath 18s ease-in-out infinite alternate, bgReveal 1.5s ease-out forwards;
+}
+
+/* Star layer 1 — small stars, very slow drift */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.28;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 20%, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(1px 1px at 85% 15%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 50% 45%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 25% 70%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 75% 55%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 40% 90%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 60% 30%, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(1px 1px at 8% 50%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 92% 75%, rgba(255, 255, 255, 0.6), transparent);
+  background-size: 100% 100%;
+  animation: driftSlow 90s linear infinite;
+}
+
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg) var(--space);
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Nebula glow — soft purple/magenta, gentle shift to match cosmic image */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  background: radial-gradient(ellipse 90% 80% at 50% 40%, rgba(140, 90, 200, 0.35), transparent 65%);
+  filter: blur(80px);
+  animation: nebulaShift 40s ease-in-out infinite alternate;
+}
+
+/* Floating light particles — soft pinpricks, slow drift */
+.page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    radial-gradient(3px 3px at 20% 30%, rgba(230, 220, 255, 0.95), transparent),
+    radial-gradient(2px 2px at 80% 60%, rgba(220, 200, 255, 0.9), transparent),
+    radial-gradient(2px 2px at 50% 85%, rgba(240, 225, 255, 0.85), transparent);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: floatParticles 28s ease-in-out infinite;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.link-log,
+.link-dashboard {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.link-log:hover,
+.link-dashboard:hover {
+  color: var(--text);
+}
+
+/* Log form */
+.log-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  flex: 1;
+}
+
+.slider-group label,
+.note-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+}
+
+/* Large touch-friendly sliders; smooth thumb */
+input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: var(--slider-track);
+  border-radius: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  margin-top: -8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  background: var(--slider-thumb-hover);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: var(--slider-track);
+  border-radius: 4px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+  background: var(--slider-thumb-hover);
+}
+
+.slider-value {
+  min-width: 2.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.note-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.note-input::placeholder {
+  color: var(--text-dim);
+}
+
+.note-input:focus {
+  outline: none;
+  border-color: var(--accent-soft);
+}
+
+.btn-submit {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: var(--card-bg);
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 28px var(--glow-purple);
+  transform: scale(1.02);
+}
+
+.btn-submit:focus {
+  outline: none;
+  border-color: var(--accent-soft);
+}
+
+/* Subtle ripple on click — fades out in 600ms */
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(140, 110, 200, 0.18) 0%, transparent 70%);
+  transform: scale(0);
+  pointer-events: none;
+}
+
+.btn-ripple--active {
+  animation: rippleOut 600ms ease-out forwards;
+}
+
+/* Subtle "Saved" feedback; opacity fade only */
+.save-feedback {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.save-feedback--out {
+  opacity: 0;
+}
+
+/* Nav */
+.nav {
+  margin-top: var(--space-lg);
+  padding-top: var(--space);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.link-dashboard {
+  display: inline-block;
+}
+
+/* Dashboard */
+.dashboard-page .header {
+  margin-bottom: var(--space);
+}
+
+.xp-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space) var(--space-lg);
+  margin-bottom: var(--space-lg);
+  padding: var(--space);
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 0 40px var(--glow-purple),
+    0 0 80px var(--glow-magenta);
+  backdrop-filter: blur(8px);
+}
+
+.xp-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.xp-label {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.xp-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.weekly-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  margin: 0 0 var(--space);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.weekly-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+}
+
+/* Metric block: label + value on one line, bar below; gentle fade in */
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  animation: fadeInSoft 1.2s ease forwards;
+}
+
+.metric-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.metric-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.bar-wrap {
+  height: 10px;
+  background: var(--slider-track);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--bar-fill-start) 0%, var(--bar-fill-end) 100%);
+  border-radius: 6px;
+  min-width: 0;
+  max-width: 100%;
+  transition: width 1.5s ease-out;
+}
+
+/* Empty state: calm and centered */
+.empty-state-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.empty-state {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+/* ——— Star shower (cute, slow) ——— */
+.stars-shower {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star-shower-dot {
+  position: absolute;
+  top: -20px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(230, 220, 255, 0.9);
+  box-shadow: 0 0 6px rgba(240, 230, 255, 0.6);
+  animation: starFall 120s linear infinite;
+}
+
+/* ——— Click sparkle (wherever you click) ——— */
+.click-sparkle {
+  position: fixed;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.click-sparkle-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  margin-top: -2.5px;
+  border-radius: 50%;
+  background: rgba(255, 250, 255, 0.95);
+  box-shadow: 0 0 8px rgba(220, 200, 255, 0.8);
+  opacity: 0;
+  transform: rotate(var(--angle, 0deg)) translateY(0);
+  animation: sparkleOut 1.2s ease-out forwards;
+  animation-play-state: paused;
+}
+
+.click-sparkle--active .click-sparkle-dot {
+  animation-play-state: running;
+}
